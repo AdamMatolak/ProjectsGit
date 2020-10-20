@@ -19,31 +19,39 @@ public class Loteria {
         loteria.prize();
     }
 
-    public void inputNumbers(){
+    public void inputNumbers() {
         int i = 0;
         int in;
         double yourBet;
         Scanner sc = new Scanner(System.in);
-        while(i<5){
+        while (i < 5) {
             System.out.print("Enter " + (i + 1) + ". number : ");
             in = sc.nextInt();
-            if(in>0 && in < 21 && checkArray(i, in)) {
-                tip[i]=in;
+            if (in > 0 && in < 21 && checkArray(i, in)) {
+                tip[i] = in;
                 i++;
-            }
-            else{
+            } else {
                 System.out.println("Wrong input! Try again!");
             }
         }
         System.out.println("Your tips: ");
-        for(i = 0;i < 5;i++){
+        for (i = 0; i < 5; i++) {
             System.out.print(tip[i] + " ");
         }
         System.out.println();
         System.out.print("Enter your bet: ");
         yourBet = sc.nextDouble();
-        bet = yourBet;
-        System.out.println();
+        int zbytocnaPremenna = 0;
+        while (zbytocnaPremenna == 0) {
+            if (yourBet < 0) {
+                System.out.print("Wrong input, try again: ");
+                yourBet = sc.nextDouble();
+            } else {
+                bet = yourBet;
+                System.out.println();
+                zbytocnaPremenna++;
+            }
+        }
     }
 
     public boolean checkArray(int i, int in){
@@ -122,6 +130,6 @@ public class Loteria {
         else if(match == 5){
             won = 10000 * bet;
         }
-        System.out.println("Congratulations! You won " + won + " €!.");
+        System.out.println("Congratulations! You won " + won + " €!");
     }
 }
