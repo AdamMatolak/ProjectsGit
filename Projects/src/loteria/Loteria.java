@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class Loteria {
     private int[] tip = new int[5];
     private int[] zreb = new int[10];
+    private double bet;
 
     public static void main(String[] args) {
         Loteria loteria = new Loteria();
@@ -14,11 +15,14 @@ public class Loteria {
         loteria.drawNumbers();
         //overovanie
         loteria.confirmNumbers();
+        //speňaženie
+        loteria.prize();
     }
 
     public void inputNumbers(){
         int i = 0;
         int in;
+        double yourBet;
         Scanner sc = new Scanner(System.in);
         while(i<5){
             System.out.print("Enter " + (i + 1) + ". number : ");
@@ -35,6 +39,10 @@ public class Loteria {
         for(i = 0;i < 5;i++){
             System.out.print(tip[i] + " ");
         }
+        System.out.println();
+        System.out.print("Enter your bet: ");
+        yourBet = sc.nextDouble();
+        bet = yourBet;
         System.out.println();
     }
 
@@ -91,5 +99,29 @@ public class Loteria {
         }
         System.out.println(match + " of your numbers matched with drawn numbers.");
         System.out.println();
+    }
+    public void prize(){
+        int match = 0;
+        for(int i = 0;i<10;i++){
+            for(int j = 0;j < 5;j++){
+                if(tip[j]==zreb[i]){
+                    match++;
+                }
+            }
+        }
+        double won = 0;
+        if(match == 2){
+            won = 2 * bet;
+        }
+        else if(match == 3){
+            won = 15 * bet;
+        }
+        else if(match == 4){
+            won = 500*bet;
+        }
+        else if(match == 5){
+            won = 10000 * bet;
+        }
+        System.out.println("Congratulations! You won " + won + " €!.");
     }
 }
