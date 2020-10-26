@@ -18,9 +18,11 @@ public class TicTacToe {
             makeTurn();
             printGameTable();
             checkGame();
+            checkWinner();
+            if(checkWinner()<3){
+                break;
+            }
         }
-        checkWinner();
-
     }
     public static void printGameTable(){
         for(int i = 0;i < 3;i++){
@@ -83,14 +85,14 @@ public class TicTacToe {
         }
         gameTable[chosenLine][chosenColumn] = playerOnTurn;
     }
-    public static void checkWinner(){
+    public static int checkWinner(){
         int winner=3;
         for(int i = 0;i < 3;i++){
             if(gameTable[i][0]==1&&gameTable[i][1]==1&&gameTable[i][2]==1){
                 winner = 1;
                 break;
             }
-            else if(gameTable[0][i]==1&&gameTable[1][i]==1&gameTable[2][i]==1){
+            else if(gameTable[0][i]==1&&gameTable[1][i]==1&&gameTable[2][i]==1){
                 winner = 1;
                 break;
             }
@@ -98,26 +100,26 @@ public class TicTacToe {
                 winner = 2;
                 break;
             }
-            else if(gameTable[0][i]==2&&gameTable[1][i]==2&gameTable[2][i]==2){
+            else if(gameTable[0][i]==2&&gameTable[1][i]==2&&gameTable[2][i]==2){
                 winner = 2;
                 break;
             }
         }
         if(winner==3){
-            if(gameTable[0][0]==1&&gameTable[1][1]==1&gameTable[2][2]==1){
+            if(gameTable[0][0]==1&&gameTable[1][1]==1&&gameTable[2][2]==1){
                 winner = 1;
             }
             else if(gameTable[0][2]==1&&gameTable[1][1]==1&&gameTable[2][0]==1){
                 winner = 1;
             }
-            else if(gameTable[0][0]==2&&gameTable[1][1]==2&gameTable[2][2]==2){
+            else if(gameTable[0][0]==2&&gameTable[1][1]==2&&gameTable[2][2]==2){
                 winner = 2;
             }
             else if(gameTable[0][2]==2&&gameTable[1][1]==2&&gameTable[2][0]==2){
                 winner = 2;
             }
             else{
-                winner = 0;
+                winner = 3;
             }
         }
         if(winner == 1){
@@ -126,9 +128,8 @@ public class TicTacToe {
         else if(winner == 2){
             System.out.println("Congrats, player 2 won!");
         }
-        else if(winner == 0){
-            System.out.println("Its a draw...");
-        }
 
+
+        return winner;
     }
 }
