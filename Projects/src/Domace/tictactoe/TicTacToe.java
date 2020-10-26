@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class TicTacToe {
 
     private static int[][] gameTable = new int[][]{{0,0,0},{0,0,0},{0,0,0}};
-    public static int playerNow;
+    public static int playerNow = 2;
 
     public static void main(String[] args) {
         printGameTable();
@@ -54,20 +54,19 @@ public class TicTacToe {
         int player1 = 1;
         int player2 = 2;
         int switchedPlayer = 2;
-        if(switchedPlayer==player2){
-            switchedPlayer--;
+        if(playerNow==player2){
+            switchedPlayer=player1;
         }
-        else{
-            switchedPlayer++;
+        else if(playerNow==player1){
+            switchedPlayer=player2;
         }
         playerNow=switchedPlayer;
     }
     public static void makeTurn() {
         int chosenLine = 0;
         int chosenColumn = 0;
-        int playerOnTurn =playerNow;
         Scanner sc = new Scanner(System.in);
-        System.out.print("Player number " + playerOnTurn + ", choose the line:");
+        System.out.print("Player number " + playerNow + ", choose the line:");
         int enteredValue1 = sc.nextInt();
         if (enteredValue1 < 1 || enteredValue1 > 3) {
             System.out.print("Wrong input, try again: ");
@@ -75,7 +74,7 @@ public class TicTacToe {
         } else {
             chosenLine = enteredValue1 - 1;
         }
-        System.out.print("Player number " + playerOnTurn + ", choose the column: ");
+        System.out.print("Player number " + playerNow + ", choose the column: ");
         int enteredValue2 = sc.nextInt();
         if (enteredValue2 < 1 || enteredValue2 > 3) {
             System.out.print("Wrong input, try again: ");
@@ -83,7 +82,7 @@ public class TicTacToe {
         } else {
             chosenColumn = enteredValue2 - 1;
         }
-        gameTable[chosenLine][chosenColumn] = playerOnTurn;
+        gameTable[chosenLine][chosenColumn] = playerNow;
     }
     public static int checkWinner(){
         int winner=3;
